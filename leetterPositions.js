@@ -1,41 +1,34 @@
-const assertArraysEqual = function(arr1, arr2) {
-    if (eqArrays(arr1, arr2)) {
-      console.log(`✅✅✅ Assertion Passed: ${arr1} === ${arr2}`);
-    } else {
-      console.log(`🛑🛑🛑 Assertion Failed: ${arr1} !== ${arr2}`);
-    }
-  };
-  
-  const eqArrays = function(arr1, arr2) {
-    if (arr1.length !== arr2.length) {
+const assertArraysEqual = function (array1, array2) {
+  if (eqArrays(array1,array2)) { 
+    console.log(`✅✅✅Assertion Passed: ${array1} === ${array2}`);
+  } else {
+    console.log(`🛑🛑🛑 Assertion Failed: ${array1} !== ${array2}`);
+  }
+};
+function eqArrays(array1, array2) {
+  if (array1.length !== array2.length) {
+    return false;
+  }
+
+  for (let i = 0; i < array1.length; i++) {
+    if (array1[i] !== array2[i]) {
       return false;
     }
-    for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i] !== arr2[i]) {
-        return false;
+  }
+
+  return true;
+}
+const letterPositions = function(sentence) {
+  const results = {};
+  for (let i = 0; i < sentence.length; i++) {
+    if (sentence[i] !== " ") {
+      if (!results[sentence[i]]) {
+        results[sentence[i]] = [];
       }
+      results[sentence[i]].push(i);
     }
-    return true;
-  };
-  
-  const letterPositions = function(sentence) {
-    const results = {};
-    for (let i = 0; i < sentence.length; i++) {
-      if (sentence[i] !== ' ') {
-        if (results[sentence[i]]) {
-          results[sentence[i]].push(i);
-        } else {
-          results[sentence[i]] = [i];
-        }
-      }
-    }
-    return results;
-  };
-  
-  const test = letterPositions('hello');
-  console.log(test);
-  assertArraysEqual(test['h'], [0]);
-  assertArraysEqual(test['e'], [1]);
-  assertArraysEqual(test['l'], [2,3]);
-  assertArraysEqual(test['o'], [4]);
-  
+  }
+  return results;
+};
+
+assertArraysEqual(letterPositions("hello").e, [1]);

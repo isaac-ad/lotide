@@ -1,28 +1,41 @@
-
-
-// ACTUAL FUNCTION
-const middle = function(array) {
-  let result = []
-  // check if array has odd number of elments
-  if (array.length % 2 === 1){
-    let middleIndex = (array.length - 1) / 2
-    let middleElement = array[middleIndex]
-    result.push(middleElement)
+const assertArraysEqual = (array1, array2) => {
+  const isEqual = eqArrays(array1, array2);
+  if (isEqual) { 
+    console.log(`✅✅✅Assertion Passed: ${array1} === ${array2}`);
+  } else {
+    console.log(`🛑🛑🛑 Assertion Failed: ${array1} !== ${array2}`);
   }
-  else {
-    let firstMiddleIndex = (array.length / 2) - 1;
-    let secondMiddleIndex = firstMiddleIndex + 1
-    let firstMiddleElement = array[firstMiddleIndex]
-    let secondMiddleElement = array[secondMiddleIndex]
-    result.push(firstMiddleElement);
-    result.push(secondMiddleElement);
-  }
-  return result ; 
-}
-let elemnts = [1,2,3,4]
-let some = [1,2,3,4,5,6,7]
-console.log(middle(elemnts));
-console.log(middle(some));
+};
 
-// [1,2,3,4,5,6,7] = formulla 7-1 / 2 = 3 
-// [1,2,3,4] = formulla ( 4 / 2 )-1 = 1 this is for to know the index of the first middle element 
+const eqArrays = (array1, array2) => {
+  if (array1.length !== array2.length) {
+    return false;
+  }
+
+  for (let i = 0; i < array1.length; i++) {
+    if (array1[i] !== array2[i]) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+const middle = array => {
+  let middleArray = [];
+  const isOdd = array.length % 2 !== 0;
+  if (isOdd) {
+    const middleIndex = (array.length - 1) / 2;
+    const middleElement = array[middleIndex];
+    middleArray = [middleElement];
+  } else {
+    const middleIndex1 = (array.length - 2) / 2;
+    const middleIndex2 = middleIndex1 + 1;
+    const middleElement1 = array[middleIndex1];
+    const middleElement2 = array[middleIndex2];
+    middleArray = [middleElement1, middleElement2];
+  }
+  return middleArray;
+};
+
+module.exports = middle;
